@@ -20,14 +20,7 @@ typedef struct {
     int process_indices[MAX_PROCESSES]; // Indices of processes in this queue
 } Queue;
 
-void print_gantt_chart(Process processes[], int n) {
-    printf("\nGantt Chart:\n| ");
-    for (int i = 0; i < n; i++) {
-        printf("P%d ", processes[i].pid);
-        printf("| ");
-    }
-    printf("\n");
-}
+
 
 void print_averages(Process processes[], int n) {
     double total_waiting_time = 0, total_turnaround_time = 0;
@@ -58,7 +51,7 @@ void fcfs(Process processes[], int n) {
         printf("%d\t%d\t%d\t%d\t%d\n", processes[i].pid, processes[i].arrival_time,
                processes[i].burst_time, processes[i].waiting_time, processes[i].turnaround_time);
     }
-    print_gantt_chart(processes, n);
+
     print_averages(processes, n);
 }
 
@@ -96,7 +89,7 @@ void sjf(Process processes[], int n) {
         printf("%d\t%d\t%d\t%d\t%d\n", processes[i].pid, processes[i].arrival_time,
                processes[i].burst_time, processes[i].waiting_time, processes[i].turnaround_time);
     }
-    print_gantt_chart(processes, n);
+
     print_averages(processes, n);
 }
 
@@ -110,7 +103,7 @@ void rr(Process processes[], int n, int quantum) {
     printf("\nRR Results:\n");
     printf("PID\tArrival\tBurst\tWaiting\tTurnaround\n");
 
-    printf("\nGantt Chart:\n| ");
+
     while (completed < n) {
         int executed = 0;
 
@@ -179,7 +172,7 @@ void priority(Process processes[], int n) {
         printf("%d\t%d\t%d\t%d\t%d\t%d\n", processes[i].pid, processes[i].arrival_time,
                processes[i].burst_time, processes[i].priority, processes[i].waiting_time, processes[i].turnaround_time);
     }
-    print_gantt_chart(processes, n);
+
     print_averages(processes, n);
 }
 
@@ -193,7 +186,7 @@ void srt(Process processes[], int n) {
     printf("\nSRT Results:\n");
     printf("PID\tArrival\tBurst\tWaiting\tTurnaround\n");
 
-    printf("\nGantt Chart:\n| ");
+   
     while (completed < n) {
         shortest = -1;
         min_remaining = INT_MAX;
@@ -269,7 +262,7 @@ void multilevel_queue(Process processes[], int n, Queue queues[], int num_queues
         switch (queues[q].algorithm) {
             case 1: // FCFS
                 {
-                    printf("Gantt Chart:\n");
+                   
                     for (int i = 0; i < queue_size; i++) {
                         if (current_time < queue_processes[i].arrival_time)
                             current_time = queue_processes[i].arrival_time;
@@ -288,7 +281,7 @@ void multilevel_queue(Process processes[], int n, Queue queues[], int num_queues
                     int completed = 0;
                     int is_completed[MAX_PROCESSES] = {0};
                     
-                    printf("Gantt Chart:\n");
+                    
                     while (completed < queue_size) {
                         int min_index = -1;
                         int min_burst = INT_MAX;
@@ -328,7 +321,7 @@ void multilevel_queue(Process processes[], int n, Queue queues[], int num_queues
                         remaining_bt[i] = queue_processes[i].burst_time;
                     }
                     
-                    printf("Gantt Chart:\n");
+                  
                     while (completed < queue_size) {
                         int executed = 0;
                         
@@ -362,7 +355,7 @@ void multilevel_queue(Process processes[], int n, Queue queues[], int num_queues
                     int completed = 0;
                     int is_completed[MAX_PROCESSES] = {0};
                     
-                    printf("Gantt Chart:\n");
+                    
                     while (completed < queue_size) {
                         int idx = -1;
                         int min_priority = INT_MAX;
